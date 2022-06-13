@@ -7,6 +7,7 @@ import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Log
 import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.projectssc.recipeapp.adapter.MainCategoryAdapter
@@ -46,6 +47,44 @@ class HomeActivity : BaseActivity() {
         mainCategoryAdapter.setClickListener(onCLicked)
         subCategoryAdapter.setClickListener(onCLickedSubItem)
 
+
+        search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                launch {
+                    this.let {
+                        var cat = RecipeDatabase.getDatabase(this@HomeActivity).recipeDao().getAllCategory()
+                        arrMainCategory = cat as ArrayList<CategoryItems>
+
+                        var search: ArrayList<CategoryItems> = ArrayList()
+                        for (categoryItems in arrMainCategory) {
+                            if (categoryItems.strcategory.equals(
+                                   query?.capitalize()
+                                )
+                            ) {
+                                search.add(categoryItems)
+                            }
+                        }
+                        arrMainCategory.reverse()
+
+                        getMealDataFromDb(arrMainCategory[0].strcategory)
+                        mainCategoryAdapter.setData(search)
+                        rv_main_category.layoutManager =
+                            LinearLayoutManager(this@HomeActivity, LinearLayoutManager.HORIZONTAL, false)
+                        rv_main_category.adapter = mainCategoryAdapter
+
+                        getMealDataFromDb(query!!.capitalize())
+
+                    }
+                }
+
+                search_view.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                return false
+            }
+        })
 
         val closeBtnId =
             search_view.context.resources.getIdentifier("android:id/search_close_btn", null, null)
