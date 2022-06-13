@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">#00000000</color>
+    <color name="pink">#F6DEDE</color>
+    <color name="online">#C64141</color>
+    <color name="darkGray">#3A3939</color>
+    <color name="yellow">#FFC107</color>
+    <color name="red">#A11B11</color>
+    <color name="brown">#433232</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="gray">#ECECEC</color>
+    <color name="hintTextColor">#FF616161</color>
+    <color name="blue">#22328E</color>
+    <color name="light_blue">#03A9F4</color>
+    <color name="maps">#4CAF50</color>
+    <color name="totalCalories">#9A2906</color>
+    <color name="calories">#FF9800</color>
+</resources>
